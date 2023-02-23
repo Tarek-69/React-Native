@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
   FlatList,
+  ImageBackground,
 } from "react-native";
 
 export default function App() {
@@ -36,36 +37,42 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView>
-        <Text style={styles.baseText}>Todo liste en react native</Text>
+    <ImageBackground
+      style={styles.imgBackground}
+      resizeMode="cover"
+      source={require("./src/Images/wallpaper.jpeg")}
+    >
+      <View style={styles.container}>
+        <SafeAreaView>
+          <Text style={styles.baseText}>Todo liste en react native</Text>
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Entrez votre tâche à réaliser"
-            value={text}
-            onChangeText={onChangeText}
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Entrez votre tâche à réaliser"
+              value={text}
+              onChangeText={onChangeText}
+            />
+
+            <Button title="Ajouter une tâche" onPress={handleAddGoal} />
+          </View>
+
+          <FlatList
+            data={goals.map((goal, index) => ({ goal, index }))}
+            renderItem={({ item }) => (
+              <View style={styles.listItemContainer}>
+                <Text style={styles.listItem}>{item.goal}</Text>
+                <Button
+                  title="Supprimer la tâche"
+                  onPress={() => handleDeleteGoal(item.index)}
+                />
+              </View>
+            )}
+            keyExtractor={(item) => item.index.toString()}
           />
-
-          <Button title="Ajouter une tâche" onPress={handleAddGoal} />
-        </View>
-
-        <FlatList
-          data={goals.map((goal, index) => ({ goal, index }))}
-          renderItem={({ item }) => (
-            <View style={styles.listItemContainer}>
-              <Text style={styles.listItem}>{item.goal}</Text>
-              <Button
-                title="Supprimer la tâche"
-                onPress={() => handleDeleteGoal(item.index)}
-              />
-            </View>
-          )}
-          keyExtractor={(item) => item.index.toString()}
-        />
-      </SafeAreaView>
-    </View>
+        </SafeAreaView>
+      </View>
+    </ImageBackground>
   );
 }
 
@@ -109,5 +116,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 10,
     color: "#7c1373",
+  },
+
+  imgBackground: {
+    width: "100%",
+    height: "100%",
+    flex: 1,
   },
 });
