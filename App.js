@@ -43,12 +43,12 @@ export default function App() {
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Entrez votre texte ici"
+            placeholder="Entrez votre tâche à réaliser"
             value={text}
             onChangeText={onChangeText}
           />
 
-          <Button title="Ajouter un item" onPress={handleAddGoal} />
+          <Button title="Ajouter une tâche" onPress={handleAddGoal} />
         </View>
 
         <FlatList
@@ -57,7 +57,7 @@ export default function App() {
             <View style={styles.listItemContainer}>
               <Text style={styles.listItem}>{item.goal}</Text>
               <Button
-                title="Effacer"
+                title="Supprimer la tâche"
                 onPress={() => handleDeleteGoal(item.index)}
               />
             </View>
@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     width: "60%",
-    marginRight: 0,
+    marginRight: 3,
   },
   listItemContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginHorizontal: 20,
+    marginHorizontal: 2,
   },
   listItem: {
     marginLeft: 0,
