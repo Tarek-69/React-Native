@@ -31,7 +31,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <SafeAreaView>
-        <Text style={styles.baseText}>App.js</Text>
+        <Text style={styles.baseText}>Todo liste en react native</Text>
 
         <View style={styles.inputContainer}>
           <TextInput
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     padding: 10,
-    width: "50%",
+    width: "60%",
     marginRight: 0,
   },
 
