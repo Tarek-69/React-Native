@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
   },
   baseText: {
     fontWeight: "bold",
-   
-    color: "#bbbbb9",
+
+    color: "#1a0aa3",
     textAlign: "center",
     margin: 23,
   },
@@ -108,6 +108,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     flex: 1,
     marginRight: 10,
-    color:"green",
+    color: "#7c1373",
   },
 });
