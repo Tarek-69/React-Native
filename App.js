@@ -26,7 +26,7 @@ export default function App() {
 
   const handleAddGoal = () => {
     setGoals([...goals, text]);
-    onChangeText("");
+    onChangeText("Cliquez ici pour continuer");
   };
 
   const handleDeleteGoal = (index) => {
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
   },
   baseText: {
     fontWeight: "bold",
-    color: "red",
+   
+    color: "#bbbbb9",
     textAlign: "center",
     margin: 23,
   },
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginHorizontal: 2,
+    marginHorizontal: 6,
   },
   listItem: {
     marginLeft: 0,
@@ -107,5 +108,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     flex: 1,
     marginRight: 10,
+    color:"green",
   },
 });
