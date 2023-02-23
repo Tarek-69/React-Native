@@ -1,21 +1,17 @@
-import React from "react";
-import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Button,
   SafeAreaView,
   Text,
   TextInput,
-  TextInputComponent,
   View,
   FlatList,
 } from "react-native";
 
 export default function App() {
-  const [text, onChangeText] = React.useState("Text");
-  const [number, onChangeNumber] = React.useState("Number");
-
-  const sampleGoals = [
+  const [text, onChangeText] = useState("");
+  const [goals, setGoals] = useState([
     "Faire les courses",
     "Aller à la salle de sport 3 fois par semaine",
     "Monter à plus de 5000m d altitude",
@@ -26,7 +22,18 @@ export default function App() {
     "Faire une mission en freelance",
     "Organiser un meetup autour de la tech",
     "Faire un triathlon",
-  ];
+  ]);
+
+  const handleAddGoal = () => {
+    setGoals([...goals, text]);
+    onChangeText("");
+  };
+
+  const handleDeleteGoal = (index) => {
+    const newGoals = [...goals];
+    newGoals.splice(index, 1);
+    setGoals(newGoals);
+  };
 
   return (
     <View style={styles.container}>
@@ -37,25 +44,25 @@ export default function App() {
           <TextInput
             style={styles.input}
             placeholder="Entrez votre texte ici"
+            value={text}
+            onChangeText={onChangeText}
           />
 
-          <Button title="Ajouter un item " onPress={() => sampleGoals} />
+          <Button title="Ajouter un item" onPress={handleAddGoal} />
         </View>
 
         <FlatList
-          data={[
-            { key: "Faire les courses" },
-            { key: "Aller à la salle de sport 3 fois par semaine" },
-            { key: "Monter à plus de 5000m d altitude" },
-            { key: "Acheter mon premier appartement" },
-            { key: "Perdre 5 kgs" },
-            { key: "Gagner en productivité" },
-            { key: "Apprendre un nouveau langage" },
-            { key: "Faire une mission en freelance" },
-            { key: "Organiser un meetup autour de la tech" },
-            { key: "Faire un triathlon" },
-          ]}
-          renderItem={({ item }) => <Text style={styles.list}>{item.key}</Text>}
+          data={goals.map((goal, index) => ({ goal, index }))}
+          renderItem={({ item }) => (
+            <View style={styles.listItemContainer}>
+              <Text style={styles.listItem}>{item.goal}</Text>
+              <Button
+                title="Effacer"
+                onPress={() => handleDeleteGoal(item.index)}
+              />
+            </View>
+          )}
+          keyExtractor={(item) => item.index.toString()}
         />
       </SafeAreaView>
     </View>
@@ -88,10 +95,17 @@ const styles = StyleSheet.create({
     width: "60%",
     marginRight: 0,
   },
-
-  list: {
+  listItemContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginHorizontal: 20,
+  },
+  listItem: {
     marginLeft: 0,
-    fontSize: 12,
+    fontSize: 18,
     marginVertical: 10,
+    flex: 1,
+    marginRight: 10,
   },
 });
