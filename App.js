@@ -7,7 +7,6 @@ import {
   TextInput,
   View,
   FlatList,
-  ImageBackground,
 } from "react-native";
 
 export default function App() {
@@ -38,10 +37,6 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        style={styles.theImage}
-        source={{ uri: item.imageUrl }}
-      ></ImageBackground>
       <SafeAreaView>
         <Text style={styles.baseText}>Todo liste en react native</Text>
 
