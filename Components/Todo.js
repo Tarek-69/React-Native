@@ -6,7 +6,7 @@ function Todo(props) {
 
   const handleDelete = () => {
     props.deleteTodo(props.index);
-    setModalVisible(false);
+    setModalVisible(false); // On cache la modal avec False
   };
 
   return (
@@ -14,7 +14,7 @@ function Todo(props) {
       <Text style={styles.listItem}>{props.todo}</Text>
       <Button
         title="Supprimer la tâche"
-        onPress={() => setModalVisible(true)}
+        onPress={() => setModalVisible(true)} // Si on n'appuie sur le button Supprimer la modal deviendra trye et affichera le code dessous
       />
       <Modal
         transparent={true}
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "rgba(157, 0, 154, 0.99)",
+    backgroundColor: "rgba(73, 0, 72, 0.82)",
     borderRadius: 10,
     padding: 35,
     alignItems: "center",
@@ -74,9 +74,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 10,
-    elevation: 2,
   },
-
   modalText: {
     marginBottom: 15,
     textAlign: "center",
