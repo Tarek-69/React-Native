@@ -83,8 +83,7 @@ const styles = StyleSheet.create({
   },
   baseText: {
     fontWeight: "bold",
-
-    color: "black",
+    color: "white",
     textAlign: "center",
     margin: 23,
   },
