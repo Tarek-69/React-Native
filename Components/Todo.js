@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "rgba(22, 4, 115, 0.8)",
+    backgroundColor: "rgba(157, 0, 154, 0.99)",
     borderRadius: 10,
     padding: 35,
     alignItems: "center",
