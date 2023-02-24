@@ -9,7 +9,7 @@ import {
   FlatList,
   ImageBackground,
 } from "react-native";
-import Titre from "./Components/Titre";
+import Todo from "./Components/Todo";
 
 export default function App() {
   const [text, onChangeText] = useState("");
@@ -60,8 +60,13 @@ export default function App() {
 
           <FlatList
             data={goals}
-            renderItem={({ item, index }) => <Titre todo={item} index={index} deleteTodo={(index) => handleDeleteGoal(index)} />}
-            
+            renderItem={({ item, index }) => (
+              <Todo
+                todo={item}
+                index={index}
+                deleteTodo={(index) => handleDeleteGoal(index)}
+              />
+            )}
           />
         </SafeAreaView>
       </View>

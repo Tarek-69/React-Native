@@ -1,6 +1,6 @@
 import { View, Text, Button, StyleSheet } from "react-native";
 
-function Titre(props) {
+function Todo(props) {
   return (
     <View style={styles.listItemContainer}>
       <Text style={styles.listItem}>{props.todo}</Text>
@@ -12,7 +12,7 @@ function Titre(props) {
   );
 }
 
-export default Titre;
+export default Todo;
 
 const styles = StyleSheet.create({
   listItemContainer: {
