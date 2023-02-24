@@ -1,37 +1,44 @@
 import React, { useState } from "react";
-import { View, Text, Button, StyleSheet, Modal } from "react-native";
+import { View, Text, Button, StyleSheet, Modal, TextInput } from "react-native";
 
-function Todo(props) {
+const Todo = ({ todo, index, deleteTodo }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleDelete = () => {
-    props.deleteTodo(props.index);
-    setModalVisible(false); // On cache la modal avec False
+    deleteTodo(index);
+    setModalVisible(false);
   };
 
   return (
-    <View style={styles.listItemContainer}>
-      <Text style={styles.listItem}>{props.todo}</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>{todo}</Text>
       <Button
         title="Supprimer la tâche"
-        onPress={() => setModalVisible(true)} // Si on n'appuie sur le button Supprimer la modal deviendra trye et affichera le code dessous
+        onPress={() => setModalVisible(true)}
       />
       <Modal
-        transparent={true}
+        transparent
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
       >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
             <Text style={styles.modalText}>Supprimer la tâche ?</Text>
-            <View style={{ flexDirection: "row" }}>
+            <View style={styles.modalButtonsContainer}>
               <Button
-                style={{ ...styles.button, ...styles.buttonClose }}
+                style={styles.modalButton}
                 title="Annuler"
                 onPress={() => setModalVisible(false)}
               />
               <Button
-                style={{ ...styles.button, ...styles.buttonOpen }}
+                style={styles.modalButton}
+                title="Modifier"
+                placeholder="Entrez votre tâche à réaliser"
+                value={Text}
+                onChangeText={onChangeText}
+              />
+              <Button
+                style={styles.modalButton}
                 title="Confirmer"
                 onPress={handleDelete}
               />
@@ -41,43 +48,45 @@ function Todo(props) {
       </Modal>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  listItemContainer: {
+  container: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginHorizontal: 6,
   },
-  listItem: {
-    marginLeft: 0,
+  text: {
+    flex: 1,
     fontSize: 18,
     marginVertical: 10,
-    flex: 1,
-    marginRight: 10,
     color: "white",
   },
-  centeredView: {
+  modalContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
   },
-  modalView: {
-    margin: 20,
+  modalContent: {
     backgroundColor: "rgba(73, 0, 72, 0.82)",
     borderRadius: 10,
     padding: 35,
     alignItems: "center",
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-  },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+  },
+  modalButtonsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  modalButton: {
+    borderRadius: 20,
+    padding: 10,
   },
 });
 
