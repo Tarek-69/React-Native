@@ -9,6 +9,7 @@ import {
   FlatList,
   ImageBackground,
 } from "react-native";
+import Titre from "./Components/Titre";
 
 export default function App() {
   const [text, onChangeText] = useState("");
@@ -58,17 +59,9 @@ export default function App() {
           </View>
 
           <FlatList
-            data={goals.map((goal, index) => ({ goal, index }))}
-            renderItem={({ item }) => (
-              <View style={styles.listItemContainer}>
-                <Text style={styles.listItem}>{item.goal}</Text>
-                <Button
-                  title="Supprimer la tâche"
-                  onPress={() => handleDeleteGoal(item.index)}
-                />
-              </View>
-            )}
-            keyExtractor={(item) => item.index.toString()}
+            data={goals}
+            renderItem={({ item, index }) => <Titre todo={item} index={index} deleteTodo={(index) => handleDeleteGoal(index)} />}
+            
           />
         </SafeAreaView>
       </View>
