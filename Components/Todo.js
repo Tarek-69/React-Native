@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     flex: 1,
     marginRight: 10,
-    color: "#7c1373",
+    color: "black",
   },
   centeredView: {
     flex: 1,
