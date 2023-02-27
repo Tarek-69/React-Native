@@ -1,25 +1,21 @@
 import React, { useState } from "react";
-import { View, Text, Button, StyleSheet, Modal, TextInput } from "react-native";
+import { View, Text, Button, StyleSheet, Modal } from "react-native";
 
-const Todo = ({ todo, index, deleteTodo, updateTodo }) => {
+const Todo = ({ todo, index, deleteTodo }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [updatedTodo, setUpdatedTodo] = useState(todo);
 
   const handleDelete = () => {
     deleteTodo(index);
     setModalVisible(false);
   };
 
-  const handleUpdate = () => {
-    updateTodo(index, updatedTodo);
-    setModalVisible(false);
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{todo}</Text>
-      <Button title="Modifier la tâche" onPress={() => setModalVisible(true)} />
-      <Button title="Supprimer la tâche" onPress={handleDelete} />
+      <Button
+        title="Supprimer la tâche"
+        onPress={() => setModalVisible(true)}
+      />
       <Modal
         transparent
         visible={modalVisible}
@@ -27,12 +23,7 @@ const Todo = ({ todo, index, deleteTodo, updateTodo }) => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Modifier la tâche :</Text>
-            <TextInput
-              style={styles.modalInput}
-              value={updatedTodo}
-              onChangeText={(text) => setUpdatedTodo(text)}
-            />
+            <Text style={styles.modalText}>Confirmer la suppression ?</Text>
             <View style={styles.modalButtonsContainer}>
               <Button
                 style={styles.modalButton}
@@ -41,8 +32,8 @@ const Todo = ({ todo, index, deleteTodo, updateTodo }) => {
               />
               <Button
                 style={styles.modalButton}
-                title="Enregistrer"
-                onPress={handleUpdate}
+                title="Supprimer"
+                onPress={handleDelete}
               />
             </View>
           </View>
@@ -80,15 +71,6 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
-  },
-  modalInput: {
-    height: 40,
-    width: "100%",
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 5,
-    marginBottom: 15,
     color: "white",
   },
   modalButtonsContainer: {
