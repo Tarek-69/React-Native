@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet, Modal, TextInput } from "react-native";
 
-const Todo = ({ todo, index, deleteTodo }) => {
+const Todo = ({ todo, index, deleteTodo, updateTodo }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [updatedTodo, setUpdatedTodo] = useState(todo);
 
   const handleDelete = () => {
     deleteTodo(index);
     setModalVisible(false);
   };
 
+  const handleUpdate = () => {
+    updateTodo(index, updatedTodo);
+    setModalVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{todo}</Text>
-      <Button
-        title="Supprimer la tâche"
-        onPress={() => setModalVisible(true)}
-      />
+      <Button title="Modifier la tâche" onPress={() => setModalVisible(true)} />
+      <Button title="Supprimer la tâche" onPress={handleDelete} />
       <Modal
         transparent
         visible={modalVisible}
@@ -23,7 +27,12 @@ const Todo = ({ todo, index, deleteTodo }) => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Supprimer la tâche ?</Text>
+            <Text style={styles.modalText}>Modifier la tâche :</Text>
+            <TextInput
+              style={styles.modalInput}
+              value={updatedTodo}
+              onChangeText={(text) => setUpdatedTodo(text)}
+            />
             <View style={styles.modalButtonsContainer}>
               <Button
                 style={styles.modalButton}
@@ -32,15 +41,8 @@ const Todo = ({ todo, index, deleteTodo }) => {
               />
               <Button
                 style={styles.modalButton}
-                title="Modifier"
-                placeholder="Entrez votre tâche à réaliser"
-                value={Text}
-                onChangeText={onChangeText}
-              />
-              <Button
-                style={styles.modalButton}
-                title="Confirmer"
-                onPress={handleDelete}
+                title="Enregistrer"
+                onPress={handleUpdate}
               />
             </View>
           </View>
@@ -78,6 +80,16 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+  },
+  modalInput: {
+    height: 40,
+    width: "100%",
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 5,
+    marginBottom: 15,
+    color: "white",
   },
   modalButtonsContainer: {
     flexDirection: "row",
